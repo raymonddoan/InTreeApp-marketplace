@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_230236) do
+ActiveRecord::Schema.define(version: 2021_03_05_013511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "sell_orders", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "price"
+    t.date "expiry_date"
+    t.bigint "stock_id", null: false
+    t.bigint "seller_id"
+    t.bigint "buyer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["buyer_id"], name: "index_sell_orders_on_buyer_id"
+    t.index ["seller_id"], name: "index_sell_orders_on_seller_id"
+    t.index ["stock_id"], name: "index_sell_orders_on_stock_id"
+  end
+
+  create_table "sentiments", force: :cascade do |t|
+    t.boolean "is_bearish"
+    t.text "comment"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_sentiments_on_user_id"
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.string "name"
+    t.string "symbol"
+    t.integer "price"
+    t.bigint "sentiment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sentiment_id"], name: "index_stocks_on_sentiment_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +68,10 @@ ActiveRecord::Schema.define(version: 2021_03_04_230236) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "profiles", "users"
+  add_foreign_key "sell_orders", "stocks"
+  add_foreign_key "sell_orders", "users", column: "buyer_id"
+  add_foreign_key "sell_orders", "users", column: "seller_id"
+  add_foreign_key "sentiments", "users"
+  add_foreign_key "stocks", "sentiments"
 end
