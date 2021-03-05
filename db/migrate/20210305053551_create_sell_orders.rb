@@ -13,5 +13,6 @@ class CreateSellOrders < ActiveRecord::Migration[6.0]
 
     add_foreign_key :sell_orders, :users, column: :seller_id, primary_key: :id
     add_foreign_key :sell_orders, :users, column: :buyer_id, primary_key: :id
+
   end
 end

@@ -8,6 +8,7 @@
       <th>Is bearish</th>
       <th>Comment</th>
       <th>User</th>
+      <th>Stock</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
         <td><%= sentiment.is_bearish %></td>
         <td><%= sentiment.comment %></td>
         <td><%= sentiment.user_id %></td>
+        <td><%= sentiment.stock_id %></td>
         <td><%= link_to 'Show', sentiment %></td>
         <td><%= link_to 'Edit', edit_sentiment_path(sentiment) %></td>
         <td><%= link_to 'Destroy', sentiment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

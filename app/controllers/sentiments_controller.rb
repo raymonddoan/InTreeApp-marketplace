@@ -64,6 +64,6 @@ class SentimentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sentiment_params
-      params.require(:sentiment).permit(:is_bearish, :comment, :user_id)
+      params.require(:sentiment).permit(:is_bearish, :comment, :user_id, :stock_id)
     end
 end
