@@ -4,7 +4,6 @@ class CreateStocks < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :symbol
       t.integer :price
-      t.references :sentiment, null: false, foreign_key: true
 
       t.timestamps
     end
