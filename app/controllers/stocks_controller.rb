@@ -1,9 +1,13 @@
+require 'httparty'
+
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = Stock.all
+    # @stocks = Stock.all
+    @stocks = HTTParty.get('https://api.coingecko.com/api/v3/coins/list')
+
   end
 
   # GET /stocks/1 or /stocks/1.json
@@ -64,6 +68,6 @@ class StocksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stock_params
-      params.require(:stock).permit(:name, :symbol, :price)
+      params.require(:stock).permit(:id, :name, :symbol)
     end
 end
