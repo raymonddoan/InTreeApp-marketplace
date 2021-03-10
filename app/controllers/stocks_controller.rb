@@ -1,12 +1,12 @@
-require 'httparty'
+# require 'httparty'
 
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
 
   # GET /stocks or /stocks.json
   def index
-    # @stocks = Stock.all
-    @stocks = HTTParty.get('https://api.coingecko.com/api/v3/coins/list')
+    @stocks = Stock.all
+    # @stocks = HTTParty.get('https://api.coingecko.com/api/v3/coins/list')
 
   end
 
