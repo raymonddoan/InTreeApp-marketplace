@@ -47,3 +47,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Add devise gem for authentication
 gem 'devise'
+
+# Add httparty gem for APIs
+gem 'httparty'
