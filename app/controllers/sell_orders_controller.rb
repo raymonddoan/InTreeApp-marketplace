@@ -6,6 +6,11 @@ class SellOrdersController < ApplicationController
     @sell_orders = SellOrder.all
   end
 
+  # Show only own orders
+  def own
+    @own_orders = SellOrder.where(seller_id: current_user.id)
+  end
+  
   # GET /sell_orders/1 or /sell_orders/1.json
   def show
   end
