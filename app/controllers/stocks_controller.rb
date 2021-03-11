@@ -12,6 +12,7 @@ class StocksController < ApplicationController
 
   # GET /stocks/1 or /stocks/1.json
   def show
+    @stock_orders = SellOrder.where(stock_id: params[:id])
   end
 
   # GET /stocks/new

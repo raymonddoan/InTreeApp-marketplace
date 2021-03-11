@@ -28,13 +28,7 @@ class SellOrdersController < ApplicationController
   # POST /sell_orders or /sell_orders.json
   def create
     @sell_order = SellOrder.new(sell_order_params)
-    # @sell_order.seller_id = current_user.id
-    # # @sell_order["seller_id"] = current_user
-    # puts "Sell order:"
-    # p @sell_order
-    # # @sell_order.save
-    # @sell_order = current_user.sell_orders.build(sell_order_params)
-    # @sell_order.seller_id = current_user
+    @sell_order.seller_id = current_user.id
 
     respond_to do |format|
       if @sell_order.save
