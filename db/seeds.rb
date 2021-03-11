@@ -23,7 +23,7 @@ if Stock.count == 0
 end
 
 if SellOrder.count == 0
-  SellOrder.create(id: 1, stock_id: 3, quantity: 3, price: 110.50, seller_id: 1, buyer_id: nil, expiry_date: "2021-04-30")
+  SellOrder.create(id: 1, stock_id: 3, quantity: 3, price: 110.50, seller_id: 1, buyer_id: 2, expiry_date: "2021-04-30")
   SellOrder.create(id: 2, stock_id: 1, quantity: 5, price: 88.50, seller_id: 3, buyer_id: nil, expiry_date: "2021-04-28")
   SellOrder.create(id: 3, stock_id: 3, quantity: 7, price: 108.50, seller_id: 4, buyer_id: nil, expiry_date: "2021-04-19")
   SellOrder.create(id: 4, stock_id: 2, quantity: 10, price: 260.80, seller_id: 1, buyer_id: nil, expiry_date: "2021-04-28")
