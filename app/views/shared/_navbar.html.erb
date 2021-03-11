@@ -1,12 +1,10 @@
 <nav>
 
   <%= link_to "Home", root_path %>
-  
-  Stocks
-  Orders
-  Profile
-  About
-  More
+  <%= link_to "Stocks", stocks_path %>
+  <%= link_to "Orders", sell_orders_path %>
+  <%= link_to "Profile", profiles_path %>
+  <%= link_to "About", root_path %>
 
   <% if !user_signed_in? %>
     <%= link_to "Sign in/up", new_user_session_path %>
