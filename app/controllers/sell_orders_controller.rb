@@ -17,6 +17,7 @@ class SellOrdersController < ApplicationController
 
   # GET /sell_orders/new
   def new
+    # @uid = current_user.id
     @sell_order = SellOrder.new
   end
 
