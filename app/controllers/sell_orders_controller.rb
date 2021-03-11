@@ -22,6 +22,7 @@ class SellOrdersController < ApplicationController
   # POST /sell_orders or /sell_orders.json
   def create
     @sell_order = SellOrder.new(sell_order_params)
+    @sell_order.seller_id = current_user.id
 
     respond_to do |format|
       if @sell_order.save
