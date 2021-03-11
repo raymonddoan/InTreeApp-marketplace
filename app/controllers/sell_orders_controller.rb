@@ -29,6 +29,7 @@ class SellOrdersController < ApplicationController
   def create
     @sell_order = SellOrder.new(sell_order_params)
     @sell_order.seller_id = current_user.id
+    @sell_order.report.attach(params[:sell_order][:report])
 
     respond_to do |format|
       if @sell_order.save
@@ -43,6 +44,9 @@ class SellOrdersController < ApplicationController
 
   # PATCH/PUT /sell_orders/1 or /sell_orders/1.json
   def update
+    @sell_order.seller_id = current_user.id
+    @sell_order.report.attach(params[:sell_order][:report])
+    
     respond_to do |format|
       if @sell_order.update(sell_order_params)
         format.html { redirect_to @sell_order, notice: "Sell order was successfully updated." }
