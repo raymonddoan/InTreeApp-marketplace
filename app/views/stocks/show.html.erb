@@ -1,5 +1,44 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Stock Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Expiry date</th>
+      <th>Stock</th>
+      <th>Seller</th>
+      <th>Buyer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stock_orders.each do |stock_order| %>
+      <tr>
+        <td><%= stock_order.quantity %></td>
+        <td><%= stock_order.price %></td>
+        <td><%= stock_order.expiry_date %></td>
+        <td><%= stock_order.stock_id %></td>
+        <td><%= stock_order.seller_id %></td>
+        <td><%= stock_order.buyer_id %></td>
+        <td><%= link_to 'Show', stock_order %></td>
+        <td><%# link_to 'Edit', edit_sell_order_path(stock_order) %></td>
+        <td><%# link_to 'Destroy', stock_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# link_to 'New Sell Order', new_sell_order_path %>
+
+
+
+<!--
 <p>
   <strong>Name:</strong>
   <%= @stock.name %>
