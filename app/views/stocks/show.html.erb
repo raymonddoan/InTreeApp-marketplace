@@ -21,12 +21,14 @@
         <td><%= stock_order.quantity %></td>
         <td><%= stock_order.price %></td>
         <td><%= stock_order.expiry_date %></td>
-        <td><%= stock_order.stock_id %></td>
+        <td><%= stock_order.stock.name %></td>
         <td><%= stock_order.seller_id %></td>
         <td><%= stock_order.buyer_id %></td>
         <td><%= link_to 'Show', stock_order %></td>
-        <td><%# link_to 'Edit', edit_sell_order_path(stock_order) %></td>
-        <td><%# link_to 'Destroy', stock_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.id && current_user.id == stock_order.seller_id %>
+          <td><%= link_to 'Edit', edit_sell_order_path(stock_order) %></td>
+          <td><%= link_to 'Destroy', stock_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -34,25 +36,4 @@
 
 <br>
 
-<%# link_to 'New Sell Order', new_sell_order_path %>
-
-
-
-<!--
-<p>
-  <strong>Name:</strong>
-  <%= @stock.name %>
-</p>
-
-<p>
-  <strong>Symbol:</strong>
-  <%= @stock.symbol %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @stock.price %>
-</p>
-
-<%= link_to 'Edit', edit_stock_path(@stock) %> |
-<%= link_to 'Back', stocks_path %>
+<%= link_to 'New Sell Order', new_sell_order_path %>
