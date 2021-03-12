@@ -37,15 +37,15 @@
   </p>
 <% end %>
 
+<%# If a non-User is accessing the link %>
+<% if !user_signed_in? %>
+  <%= button_to "Buy Now", new_user_session_path, method: :get %>
 <%# If User is the owner of the seller order %>
-<% if current_user.id && current_user.id == @sell_order.seller_id %>
+<% elsif current_user.id && current_user.id == @sell_order.seller_id %>
   <%= link_to 'Edit', edit_sell_order_path(@sell_order) %> |
 <%# If User is not the owner of the order %>
-<% elsif user_signed_in? %>
-  <button data-stripe="payment">Buy Now!</button>
-<%# If a non-User is accessing the link %>
 <% else %>
-  <%= button_to "Buy Now", new_user_session_path, method: :get %>
+  <button data-stripe="payment">Buy Now!</button>
 <% end %>
 
 <%= link_to 'Back', sell_orders_path %>
