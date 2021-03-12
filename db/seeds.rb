@@ -23,10 +23,10 @@ if Stock.count == 0
 end
 
 if SellOrder.count == 0
-  SellOrder.create(stock_id: 3, quantity: 3, price: 110.50, seller_id: 1, buyer_id: 2, expiry_date: "2021-04-30")
-  SellOrder.create(stock_id: 1, quantity: 5, price: 88.50, seller_id: 3, buyer_id: nil, expiry_date: "2021-04-28")
-  SellOrder.create(stock_id: 3, quantity: 7, price: 108.50, seller_id: 4, buyer_id: nil, expiry_date: "2021-04-19")
-  SellOrder.create(stock_id: 2, quantity: 10, price: 260.80, seller_id: 1, buyer_id: nil, expiry_date: "2021-04-28")
-  SellOrder.create(stock_id: 3, quantity: 19, price: 86.50, seller_id: 1, buyer_id: 3, expiry_date: "2021-04-16")
+  SellOrder.create(stock_id: 3, quantity: 3, price: 110.53, seller_id: 1, buyer_id: 2, expiry_date: "2021-04-30")
+  SellOrder.create(stock_id: 1, quantity: 5, price: 88.59, seller_id: 3, buyer_id: nil, expiry_date: "2021-04-28")
+  SellOrder.create(stock_id: 3, quantity: 7, price: 108.54, seller_id: 4, buyer_id: nil, expiry_date: "2021-04-19")
+  SellOrder.create(stock_id: 2, quantity: 10, price: 260.82, seller_id: 1, buyer_id: nil, expiry_date: "2021-04-28")
+  SellOrder.create(stock_id: 3, quantity: 19, price: 86.55, seller_id: 1, buyer_id: 3, expiry_date: "2021-04-16")
 end
 

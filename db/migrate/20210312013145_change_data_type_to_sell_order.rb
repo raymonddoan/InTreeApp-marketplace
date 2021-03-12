@@ -3,6 +3,6 @@ class ChangeDataTypeToSellOrder < ActiveRecord::Migration[6.0]
     change_column :sell_orders, :price, :numeric, precision: 8, scale: 2
   end
   def down
-    change_column :sell_orders, :price, :bigint
+    change_column :sell_orders, :price, :integer
   end
 end
