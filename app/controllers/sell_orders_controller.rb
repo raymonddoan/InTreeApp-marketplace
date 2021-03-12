@@ -56,6 +56,9 @@ class SellOrdersController < ApplicationController
     @sell_order = SellOrder.new(sell_order_params)
     @sell_order.seller_id = current_user.id
     @sell_order.report.attach(params[:sell_order][:report])
+    if @sell_order.buyer_id != nil
+      @sell_order.filled = true
+    end
 
     respond_to do |format|
       if @sell_order.save
@@ -72,6 +75,9 @@ class SellOrdersController < ApplicationController
   def update
     @sell_order.seller_id = current_user.id
     @sell_order.report.attach(params[:sell_order][:report])
+    if @sell_order.buyer_id != nil
+      @sell_order.filled = true
+    end
     
     respond_to do |format|
       if @sell_order.update(sell_order_params)
