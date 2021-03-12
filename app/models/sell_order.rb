@@ -8,7 +8,7 @@ class SellOrder < ApplicationRecord
 
   # VALIDATIONS
   # active_storage_validations
-  validates :report, attached: true, content_type: { in: ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'], message: "must be DOC, DOCX or PDF" }
+  validates :report, content_type: { in: ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'], message: "must be DOC, DOCX or PDF" }
   validates :report, size: { less_than: 5.megabytes, message: "must be less than 5MB in size" }
 
 end
