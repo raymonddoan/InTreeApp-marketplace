@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @sell_order.quantity %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @sell_order.price %>
+</p>
+
+<p>
+  <strong>Expiry date:</strong>
+  <%= @sell_order.expiry_date %>
+</p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @sell_order.stock_id %>
+</p>
+
+<p>
+  <strong>Seller:</strong>
+  <%= @sell_order.seller_id %>
+</p>
+
+<p>
+  <strong>Buyer:</strong>
+  <%= @sell_order.buyer_id %>
+</p>
+
+<% if @sell_order.report.attached? %>
+  <p>
+    <strong>Report:</strong>
+    <%= image_tag @sell_order.report %>
+  </p>
+<% end %>
+
+<%# If User is the owner of the seller order %>
+<% if current_user.id && current_user.id == @sell_order.seller_id %>
+  <%= link_to 'Edit', edit_sell_order_path(@sell_order) %> |
+<%# If User is not the owner of the order %>
+<% elsif user_signed_in? %>
+  <button data-stripe="payment">Buy Now!</button>
+<%# If a non-User is accessing the link %>
+<% else %>
+  <%= button_to "Buy Now", new_user_session_path, method: :get %>
+<% end %>
+
+<%= link_to 'Back', sell_orders_path %>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  document
+    .querySelector("[data-stripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      )
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      })
+
+    })
+</script>

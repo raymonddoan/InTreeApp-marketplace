@@ -35,15 +35,15 @@ Things you may want to cover:
 
 ### User stories for your app
 
-Users:
+Users: (Anyone can sell and the same person can buy as well)
 
 - As a potential user, I want to be able to sign up to the page.
 - As a user, I want to be able to login to my portfolio.
 - As a user, I want to leave sentiment (bullish or bearish) or a review on how I think the stock is going.
-- (optional) As a user, I want to see the trend for a stock. 
+- (optional) As a user, I want to see the trend for a stock.
   - Will need the use of an API (possibly from TradingView)
 
-Sellers:
+Sellers: 
 
 - As a seller, I want to create a sell order of my stock, setting the price and how long it is going to be on the market for.
 - As a seller, I want to be able to see all my stocks I have on for sale.

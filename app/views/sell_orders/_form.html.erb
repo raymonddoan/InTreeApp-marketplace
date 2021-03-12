@@ -1,0 +1,52 @@
+<%= form_with(model: sell_order, local: true) do |form| %>
+  <% if sell_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sell_order.errors.count, "error") %> prohibited this sell_order from being saved:</h2>
+
+      <ul>
+        <% sell_order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiry_date %>
+    <%= form.date_select :expiry_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stock_id %>
+    <%= form.text_field :stock_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :report %>
+    <%= form.file_field :report %>
+  </div>
+
+  <div class="field">
+    <%# form.label :seller_id %>
+    <%# form.text_field :seller_id %>
+  </div>
+
+  <div class="field">
+    <%# form.label :buyer_id %>
+    <%# form.text_field :buyer_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Place Order" %>
+  </div>
+<% end %>

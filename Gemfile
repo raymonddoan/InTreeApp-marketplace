@@ -44,3 +44,19 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Add devise gem for authentication
+gem 'devise'
+
+# Add httparty gem for APIs
+gem 'httparty'
+
+# Add cloudinary and active-storage gems for uploading capacity
+gem 'cloudinary'
+gem 'activestorage-cloudinary-service'
+
+# Add validator to make sure the uploaded documents are valid
+gem 'active_storage_validations'
+
+# Add stripe for payment capabilities
+gem 'stripe'
