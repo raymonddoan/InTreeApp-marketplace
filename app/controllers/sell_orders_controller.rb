@@ -13,6 +13,32 @@ class SellOrdersController < ApplicationController
   
   # GET /sell_orders/1 or /sell_orders/1.json
   def show
+    if user_signed_in?
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+          name: @sell_order.stock.name,
+          description: @sell_order.stock.symbol,
+          amount: (@sell_order.price * 100).to_i, # Stripe takes money by cents
+          currency: 'aud',
+          quantity: @sell_order.quantity
+        }],
+        payment_intent_data: {
+          metadata: {
+            user_id: current_user.id,
+            listing_id: @sell_order.id
+          }
+        },
+        success_url: "#{root_url}payments/success?SellOrderId=#{@sell_order.id}",
+        # Check to revert back to the order page
+        cancel_url: "#{root_url}sell_orders/#{@sell_order.id}"
+      )
+    
+      @session_id = session.id
+    end
+
+    pp @sell_order.report
   end
 
   # GET /sell_orders/new
