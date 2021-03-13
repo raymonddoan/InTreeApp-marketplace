@@ -1,19 +1,28 @@
-<nav>
+<div class="bg-blue-800">
+  <div class="container mx-auto bg-blue-800 p-5">
+    <div>
+      <nav class="flex justify-between">
+        <ul class="flex flex-row">
+          <li class="pr-5 text-white">Logo</li>
+          <li class="pr-5"><%= link_to "Home", root_path, class: "hover:bg-blue-200" %></li>
+          <li class="pr-5"><%= link_to "Stocks", stocks_path %></li>
 
-  <%= link_to "Home", root_path %>
-  <%= link_to "Stocks", stocks_path %>
+          <% if user_signed_in? %>
+            <li class="pr-5"><%= link_to "Orders", own_orders_path %></li>
+            <li class="pr-5"><%# link_to "Profile", profiles_path %></li>
+          <% end %>
+          <%# link_to "About", root_path %>
+        </ul>
 
-  <% if user_signed_in? %>
-    <%= link_to "Orders", own_orders_path %>
-    <%# link_to "Profile", profiles_path %>
-  <% end %>
-  <%# link_to "About", root_path %>
-
-  <% if !user_signed_in? %>
-    <%= link_to "Log In", new_user_session_path %>
-    <%= link_to "Sign Up", new_user_registration_path %>
-  <% else %>
-    <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-  <% end %>
-
-</nav>
+        <ul class="flex flex-row">
+          <% if !user_signed_in? %>
+            <li class="pr-5"><%= link_to "Log In", new_user_session_path %></li>
+            <li class=""><%= link_to "Sign Up", new_user_registration_path %></li>
+          <% else %>
+            <li class=""><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@ module.exports = {
   purge: [
   './app/**/*.html.erb',
   './app/helpers/**/*.rb',
+  './app/javascript/**/*.js',
   './src/**/*.html',
   './src/**/*.js',
   './src/**/*.jsx',
