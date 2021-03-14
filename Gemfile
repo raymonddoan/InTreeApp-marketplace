@@ -57,3 +57,6 @@ gem 'activestorage-cloudinary-service'
 
 # Add validator to make sure the uploaded documents are valid
 gem 'active_storage_validations'
+
+# Add stripe for payment capabilities
+gem 'stripe'
