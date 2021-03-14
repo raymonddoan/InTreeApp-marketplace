@@ -1,47 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Sell Orders</h1>
+<div class="bg-primary h-screen">
+  <h1 class="text-2xl text-center py-6 text-white">Sell Orders</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Expiry date</th>
-      <th>Stock</th>
-      <th>Filled</th>
+  <div class="flex justify-center w-full">
+    <div class="rounded-lg border bg-white shadow m-5 w-96">
+      <%# Loop to show all the available orders %>
+      <% @sell_orders.each do |sell_order| %>
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-200 shadow flex flex-row justify-between">
+          <div class="flex flex-column">
+            <ul>
+              <li class="text-lg"><%= sell_order.stock.name %></li>
+              <li><%= number_to_currency(sell_order.price) %> (Quantity: <%= sell_order.quantity %>)</li>
+              <li>Expires: <%= sell_order.expiry_date %></li>
+              <% sell_order.filled %>
+            </ul>
+          </div>
+          <div class="w-10">
+            <%= link_to image_tag("show-dot.png"), sell_order %>
+          </div>
+        </div>
+      </div>
+      <% end %>
 
-      <%# <th>Seller</th> %>
-      <%# <th>Buyer</th> %>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sell_orders.each do |sell_order| %>
-      <tr>
-        <td><%= sell_order.quantity %></td>
-        <td><%= sell_order.price %></td>
-        <td><%= sell_order.expiry_date %></td>
-        <td><%= sell_order.stock.name %></td>
-        <td><%= sell_order.filled %></td>
-
-        <td><%# sell_order.seller_id %></td>
-        <td><%# sell_order.buyer_id %></td>
-        <td><%= link_to 'Show', sell_order %></td>
-        <td><%# link_to 'Edit', edit_sell_order_path(sell_order) %></td>
-        <td><%# link_to 'Destroy', sell_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<% if !user_signed_in? %>
-  <%# link_to "Log In", new_user_session_path %>
-  <%# link_to "Sign Up", new_user_registration_path %>
-<% else %>
-  <%# link_to "Log Out", destroy_user_session_path, method: :delete %>
-  <%= link_to 'Place Order', new_sell_order_path %>
-<% end %>
+      <%# Place Order %>
+      <% if user_signed_in? %>
+      <div class="p-1">
+        <div class="p-3 rounded-lg border bg-secondary shadow grid justify-item-stretch">
+          <p class="text-lg text-white text-center">+ <%= link_to 'Place Order', new_sell_order_path, class: "justify-self-auto" %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
