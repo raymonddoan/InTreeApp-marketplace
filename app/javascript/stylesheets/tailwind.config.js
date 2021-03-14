@@ -35,10 +35,10 @@ module.exports = {
       pink: colors.pink,
       
       primary: "#006d8f",
-      secondary: "80b6c7",
-      tertiary: "002f3d",
-      up: "00afb9",
-      down: "f07167",
+      secondary: "#80b6c7",
+      tertiary: "#002f3d",
+      up: "#00afb9",
+      down: "#f07167",
     },
     spacing: {
       px: '1px',
