@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :stock_id %>
-    <%= form.text_field :stock_id %>
+    <%= form.collection_select :stock_id, Stock.order(:name), :id, :name, include_blank: true %>
   </div>
 
   <div class="field">
