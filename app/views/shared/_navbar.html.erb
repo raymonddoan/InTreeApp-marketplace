@@ -2,56 +2,66 @@
   <div class="container mx-auto p-5">
     <nav class="flex flex-row justify-between">
       <div class="flex flex-row">
-        <a class="pr-5">Logo</a>
-        <a class="pr-5"><%= link_to image_tag("Title_Logo.png"), root_path, class: "w-36" %></a>
+        <a class="pr-5"><%= link_to image_tag("Title_Logo.png"), root_path, class: "w-36" %></a> <%# Image for the logo and returns back to Home page %>
       </div>
       
       <div class="flex flex-row">
         <ul class="flex flex-row hidden md:flex md:flex-row">
-          <li class="pr-5"><%= link_to "Stocks", stocks_path %></li>
+          <li><%= link_to "Stocks", stocks_path, class: "pr-5 font-sans text-2xl" %></li>
 
           <% if user_signed_in? %>
-            <li class="pr-5"><%= link_to "Orders", own_orders_path %></li>
+            <li><%= link_to "Orders", own_orders_path, class: "pr-5 font-sans text-2xl" %></li>
             <li class="pr-5"><%# link_to "Profile", profiles_path %></li>
           <% end %>
-          <%# link_to "About", root_path %>
+          <%# link_to "About", root_path %> 
         </ul>
       </div>
 
       <div>
         <ul class="flex flex-row hidden md:flex md:flex-row"> 
           <% if !user_signed_in? %>
-            <li class="pr-5"><%= link_to "Log In", new_user_session_path %></li>
-            <li class=""><%= link_to "Sign Up", new_user_registration_path %></li>
+            <li class="pr-5"><%= link_to "Log In", new_user_session_path, class: "pr-5 font-sans text-2xl"  %></li>
+            <li class=""><%= link_to "Sign Up", new_user_registration_path, class: "pr-5 font-sans text-2xl"  %></li>
           <% else %>
-            <li class=""><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+            <li class=""><%= link_to "Log Out", destroy_user_session_path, method: :delete , class: "pr-5 font-sans text-2xl" %></li>
           <% end %>
         </ul>
       </div>
 
-      <p id="hamburgerbtn" class="md:hidden bg-primary">☰</p>
-
+      <p id="hamburgerbtn" class="md:hidden bg-primary pr-5 font-sans text-2xl text-white">☰</p>
 
     </nav>
+
+    <%# Hamburger menu for MOBILE %>
+    <div class="flex justify-center hidden" id="mobileMenu1">
+      <ul class="md:flex md:flex-row text-center">
+        <li><%= link_to "Stocks", stocks_path, class: "pr-5 font-sans text-base" %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "Orders", own_orders_path, class: "pr-5 font-sans text-base" %></li>
+          <li class="pr-5"><%# link_to "Profile", profiles_path %></li>
+        <% end %>
+        <%# link_to "About", root_path %> 
+        <% if !user_signed_in? %>
+          <li class="pr-5"><%= link_to "Log In", new_user_session_path, class: "pr-5 font-sans text-base"  %></li>
+          <li class=""><%= link_to "Sign Up", new_user_registration_path, class: "pr-5 font-sans text-base"  %></li>
+        <% else %>
+          <li class=""><%= link_to "Log Out", destroy_user_session_path, method: :delete , class: "pr-5 font-sans text-base" %></li>
+        <% end %>
+      </ul>
+    </div>
+
   </div>
 </div>
 
 <style>
-    .active{
-        display: block;
-    }    
+  .active{
+    display: block;
+  }    
 </style>
 
+<%# Script for Hamburger %>
 <script>
-    let hamburger = document.getElementById('hamburgerbtn');
-
-    let mobileMenu1 = document.getElementById('mobileMenu1');
-
-    let mobileMenu2 = document.getElementById('mobileMenu2');
-
-
-    hamburger.addEventListener('click', function(){
-        mobileMenu1.classList.toggle('active');
-        mobileMenu2.classList.toggle('active');
-    });
+  document.getElementById('hamburgerbtn').addEventListener('click', function(){
+    document.getElementById('mobileMenu1').classList.toggle('active');
+  });
 </script>
