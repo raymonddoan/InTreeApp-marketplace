@@ -4,7 +4,7 @@
   <h1 class="text-2xl text-center py-6 text-white"><%= @stock_orders[0].stock.name %> Sell Orders</h1>
 
   <div class="flex justify-center w-full">
-    <div class="rounded-lg border bg-white shadow m-5 w-96">
+    <div class="rounded-lg border bg-white shadow m-5 md:w-1/2 w-96">
       <%# Loop to show all the available orders %>
       <% @stock_orders.each do |stock_order| %>
       <div class="p-2">

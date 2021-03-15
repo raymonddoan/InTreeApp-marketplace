@@ -1,16 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<div class="bg-primary h-100">
+<div class="bg-primary h-screen">
   <h1 class="text-2xl text-center py-6 text-white">Show Order</h1>
 
   <div class="flex justify-center">
     <% if @sell_order.report.attached? %>
-      <p class="bg-opacity-20"><%= image_tag(@sell_order.report) %></p>
+      <p class="bg-opacity-20"><%= image_tag(@sell_order.report, width: "300px") %></p>
     <% end %>
   </div>
 
   <div class="flex justify-center w-full">
-    <div class="rounded-lg border bg-white shadow m-5 w-96">
+    <div class="rounded-lg border bg-white shadow m-5 md:w-1/2 w-96">
 
       <div class="p-2">
         <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
@@ -67,7 +67,7 @@
             <% elsif current_user.id && current_user.id == @sell_order.seller_id %> <%# If User is the owner of the seller order %>
               <p class="text-lg font-sans"><%= link_to 'Edit', edit_sell_order_path(@sell_order) %></p>
             <% else %>   <%# If User is not the owner of the order %>
-              <strong class="text-lg font-sans" data-stripe="payment">Buy Now!</strong>
+              <strong class="text-lg font-sans text-white" data-stripe="payment">Buy Now!</strong>
             <% end %>
           <% end %>
           </div>
