@@ -1,52 +1,80 @@
-<%= form_with(model: sell_order, local: true) do |form| %>
-  <% if sell_order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(sell_order.errors.count, "error") %> prohibited this sell_order from being saved:</h2>
+<div class="bg-primary h-100 min-h-screen">
 
-      <ul>
-        <% sell_order.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: sell_order, local: true) do |form| %>
+    <div class="flex justify-center w-full">
+      <% if sell_order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(sell_order.errors.count, "error") %> prohibited this sell_order from being saved:</h2>
+
+          <ul>
+            <% sell_order.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
+
+    <div class="flex justify-center w-full">
+      <div class="rounded-lg border bg-white shadow m-5 w-96">
+
+        <div class="p-2">
+          <div class="field p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+            <div>
+              <strong class="text-md text-tertiary"><%= form.label :stock_id %></strong><br>
+              <p class="truncate text-md font-sans"><%= form.collection_select :stock_id, Stock.order(:name), :id, :name, include_blank: true %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-2">
+          <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+            <div>
+              <strong class="text-md text-tertiary"><%= form.label :price %></strong><br>
+              <p class="truncate text-lg font-sans"><%= form.number_field :price, step: 0.01 %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-2">
+          <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+            <div>
+              <strong class="text-md text-tertiary"><%= form.label :quantity %></strong><br>
+              <p class="truncate text-lg font-sans"><%= form.number_field :quantity %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-2">
+          <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+            <div>
+              <strong class="text-md text-tertiary"><%= form.label :expiry_date %></strong><br>
+              <p class="truncate text-lg font-sans"><%= form.date_select :expiry_date %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-2">
+          <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+            <div>
+              <strong class="text-md text-tertiary"><%= form.label :report %></strong><br>
+              <p class="truncate text-lg font-sans"><%= form.file_field :report, direct_upload: true %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-2">
+          <div class="p-3 rounded-lg border bg-secondary shadow flex flex-row justify-center">
+            <div class="text-lg font-sans">
+              <%= form.submit "Place Order" %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  
   <% end %>
-
-  <div class="field">
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price, step: 0.01 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :expiry_date %>
-    <%= form.date_select :expiry_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :stock_id %>
-    <%= form.collection_select :stock_id, Stock.order(:name), :id, :name, include_blank: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :report %>
-    <%= form.file_field :report, direct_upload: true %>
-  </div>
-
-  <div class="field">
-    <%# form.label :seller_id %>
-    <%# form.text_field :seller_id %>
-  </div>
-
-  <div class="field">
-    <%# form.label :buyer_id %>
-    <%# form.text_field :buyer_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Place Order" %>
-  </div>
-<% end %>
+  
+</div>
