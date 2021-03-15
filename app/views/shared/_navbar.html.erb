@@ -42,7 +42,7 @@
         <% end %>
         <%# link_to "About", root_path %> 
         <% if !user_signed_in? %>
-          <li class="pr-5"><%= link_to "Log In", new_user_session_path, class: "pr-5 font-sans text-base"  %></li>
+          <li class=""><%= link_to "Log In", new_user_session_path, class: "pr-5 font-sans text-base"  %></li>
           <li class=""><%= link_to "Sign Up", new_user_registration_path, class: "pr-5 font-sans text-base"  %></li>
         <% else %>
           <li class=""><%= link_to "Log Out", destroy_user_session_path, method: :delete , class: "pr-5 font-sans text-base" %></li>

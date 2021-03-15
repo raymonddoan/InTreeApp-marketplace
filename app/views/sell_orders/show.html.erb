@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <strong>Quantity:</strong>
   <%= @sell_order.quantity %>
@@ -39,19 +40,39 @@
 
 <%# Only shows when there is no Buyer %>
 <% if @sell_order.buyer_id == nil %>
-  <%# If a non-User is accessing the link %>
-  <% if !user_signed_in? %>
+  <% if !user_signed_in? %>   <%# If a non-User is accessing the link %>
     <%= button_to "Buy Now", new_user_session_path, method: :get %>
-  <%# If User is the owner of the seller order %>
-  <% elsif current_user.id && current_user.id == @sell_order.seller_id %>
+  <% elsif current_user.id && current_user.id == @sell_order.seller_id %> <%# If User is the owner of the seller order %>
     <%= link_to 'Edit', edit_sell_order_path(@sell_order) %> |
-  <%# If User is not the owner of the order %>
-  <% else %>
+  <% else %>   <%# If User is not the owner of the order %>
     <button data-stripe="payment">Buy Now!</button>
   <% end %>
 <% end %>
 
 <%= link_to 'Back', sell_orders_path %>
+
+<div class="bg-primary h-screen">
+  <h1 class="text-2xl text-center py-6 text-white">Show Order</h1>
+
+  <div>
+    <% if @sell_order.report.attached? %>
+      <p>
+        <%= url_for(@sell_order.report) %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="flex justify-center w-full">
+    <div class="rounded-lg border bg-white shadow m-5 w-96">
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-200 shadow flex flex-row justify-between">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>

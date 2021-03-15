@@ -1,39 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Stock Orders</h1>
+<div class="bg-primary h-screen">
+  <h1 class="text-2xl text-center py-6 text-white"><%= @stock_orders[0].stock.name %> Sell Orders</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Expiry date</th>
-      <th>Stock</th>
-      <th>Seller</th>
-      <th>Buyer</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="flex justify-center w-full">
+    <div class="rounded-lg border bg-white shadow m-5 w-96">
+      <%# Loop to show all the available orders %>
+      <% @stock_orders.each do |stock_order| %>
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-200 shadow flex flex-row justify-between">
+          <div class="flex flex-column">
+            <ul>
+              <li class="text-lg"><%= stock_order.stock.name %></li>
+              <li><%= number_to_currency(stock_order.price) %> (Quantity: <%= stock_order.quantity %>)</li>
+              <li>Expires: <%= stock_order.expiry_date %></li>
+              <% stock_order.filled %>
+            </ul>
+          </div>
+          <div class="w-10">
+            <%= link_to image_tag("show-dot.png"), stock_order %>
+          </div>
+        </div>
+      </div>
+      <% end %>
 
-  <tbody>
-    <% @stock_orders.each do |stock_order| %>
-      <tr>
-        <td><%= stock_order.quantity %></td>
-        <td><%= stock_order.price %></td>
-        <td><%= stock_order.expiry_date %></td>
-        <td><%= stock_order.stock.name %></td>
-        <td><%= stock_order.seller_id %></td>
-        <td><%= stock_order.buyer_id %></td>
-        <td><%= link_to 'Show', stock_order %></td>
-        <% if current_user.id && current_user.id == stock_order.seller_id %>
-          <td><%= link_to 'Edit', edit_sell_order_path(stock_order) %></td>
-          <td><%= link_to 'Destroy', stock_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Sell Order', new_sell_order_path %>
+      <%# Place Order %>
+      <% if user_signed_in? %>
+      <div class="p-1">
+        <div class="p-3 rounded-lg border bg-secondary shadow grid justify-item-stretch">
+          <p class="text-lg text-white text-center">+ <%= link_to 'Place Order', new_sell_order_path, class: "justify-self-auto" %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
