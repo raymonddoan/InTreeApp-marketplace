@@ -52,6 +52,7 @@ gem 'devise'
 gem 'httparty'
 
 # Add cloudinary and active-storage gems for uploading capacity
+gem 'carrierwave' # Adding this gem to modify Cloudinary images, but currently having issues
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 
