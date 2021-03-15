@@ -10,7 +10,7 @@
           <li><%= link_to "Stocks", stocks_path, class: "pr-5 font-sans text-2xl" %></li>
 
           <% if user_signed_in? %>
-            <li><%= link_to "Orders", own_orders_path, class: "pr-5 font-sans text-2xl" %></li>
+            <li><%= link_to "Orders", own_orders_path, class: "font-sans text-2xl" %></li>
             <li class="pr-5"><%# link_to "Profile", profiles_path %></li>
           <% end %>
           <%# link_to "About", root_path %> 

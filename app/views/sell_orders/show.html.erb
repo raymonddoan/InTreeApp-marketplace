@@ -1,78 +1,90 @@
 <p id="notice"><%= notice %></p>
 
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @sell_order.quantity %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @sell_order.price %>
-</p>
-
-<p>
-  <strong>Expiry date:</strong>
-  <%= @sell_order.expiry_date %>
-</p>
-
-<p>
-  <strong>Stock:</strong>
-  <%= @sell_order.stock_id %>
-</p>
-
-<p>
-  <strong>Seller:</strong>
-  <%= @sell_order.seller_id %>
-</p>
-
-<p>
-  <strong>Buyer:</strong>
-  <%= @sell_order.buyer_id %>
-</p>
-
-<% if @sell_order.report.attached? %>
-  <p>
-    <strong>Report:</strong>
-    <%= image_tag @sell_order.report %>
-  </p>
-<% end %>
-
-<%# Only shows when there is no Buyer %>
-<% if @sell_order.buyer_id == nil %>
-  <% if !user_signed_in? %>   <%# If a non-User is accessing the link %>
-    <%= button_to "Buy Now", new_user_session_path, method: :get %>
-  <% elsif current_user.id && current_user.id == @sell_order.seller_id %> <%# If User is the owner of the seller order %>
-    <%= link_to 'Edit', edit_sell_order_path(@sell_order) %> |
-  <% else %>   <%# If User is not the owner of the order %>
-    <button data-stripe="payment">Buy Now!</button>
-  <% end %>
-<% end %>
-
-<%= link_to 'Back', sell_orders_path %>
-
-<div class="bg-primary h-screen">
+<div class="bg-primary h-100">
   <h1 class="text-2xl text-center py-6 text-white">Show Order</h1>
 
-  <div>
+  <div class="flex justify-center">
     <% if @sell_order.report.attached? %>
-      <p>
-        <%= url_for(@sell_order.report) %>
-      </p>
+      <p class="bg-opacity-20"><%= image_tag(@sell_order.report) %></p>
     <% end %>
   </div>
 
   <div class="flex justify-center w-full">
     <div class="rounded-lg border bg-white shadow m-5 w-96">
+
       <div class="p-2">
-        <div class="p-3 rounded-lg border bg-gray-200 shadow flex flex-row justify-between">
+        <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+          <div>
+            <strong class="text-md text-tertiary">Stock name</strong><br>
+            <p class="truncate text-lg font-sans"><%= @sell_order.stock.name %></p>
+          </div>
         </div>
       </div>
+
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+          <div>
+            <strong class="text-md text-tertiary">Quantity</strong><br>
+            <p class="truncate text-lg font-sans"><%= @sell_order.quantity %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+          <div>
+            <strong class="text-md text-tertiary">Expiry Date</strong><br>
+            <p class="truncate text-lg font-sans"><%= @sell_order.expiry_date %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-row">
+        <div class="p-2 w-80">
+          <div class="p-3 rounded-lg border bg-up shadow flex flex-row justify-center h-10">
+            <div>
+              <strong class="text-md text-white">Vote Bullish</strong><br>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-2 w-80">
+          <div class="p-3 rounded-lg border bg-down shadow flex flex-row justify-center h-10">
+            <div>
+              <strong class="text-md text-white">Vote Bearish</strong><br>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-600 shadow flex flex-row justify-center">
+          <div>
+          <%# Only shows when there is no Buyer %>
+          <% if @sell_order.buyer_id == nil %>
+            <% if !user_signed_in? %>   <%# If a non-User is accessing the link %>
+              <p class="text-lg font-sans"><%= link_to "Buy Now", new_user_session_path, method: :get %></p>
+            <% elsif current_user.id && current_user.id == @sell_order.seller_id %> <%# If User is the owner of the seller order %>
+              <p class="text-lg font-sans"><%= link_to 'Edit', edit_sell_order_path(@sell_order) %></p>
+            <% else %>   <%# If User is not the owner of the order %>
+              <strong class="text-lg font-sans" data-stripe="payment">Buy Now!</strong>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-secondary shadow flex flex-row justify-center">
+          <div class="truncate text-lg font-sans">
+            <%= link_to 'Back', sell_orders_path %>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-
-
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>
