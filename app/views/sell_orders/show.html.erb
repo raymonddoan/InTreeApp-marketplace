@@ -69,6 +69,8 @@
             <% else %>   <%# If User is not the owner of the order %>
               <strong class="text-lg font-sans text-white" data-stripe="payment">Buy Now!</strong>
             <% end %>
+          <% else %>
+            <strong class="text-lg font-sans text-white">Filled!</strong>
           <% end %>
           </div>
         </div>
