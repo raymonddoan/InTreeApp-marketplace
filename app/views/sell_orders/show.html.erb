@@ -1,57 +1,90 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @sell_order.quantity %>
-</p>
+<div class="bg-primary h-screen">
+  <h1 class="text-2xl text-center py-6 text-white">Show Order</h1>
 
-<p>
-  <strong>Price:</strong>
-  <%= @sell_order.price %>
-</p>
+  <div class="flex justify-center">
+    <% if @sell_order.report.attached? %>
+      <p class="bg-opacity-20"><%= image_tag(@sell_order.report, width: "300px") %></p>
+    <% end %>
+  </div>
 
-<p>
-  <strong>Expiry date:</strong>
-  <%= @sell_order.expiry_date %>
-</p>
+  <div class="flex justify-center w-full">
+    <div class="rounded-lg border bg-white shadow m-5 md:w-1/2 w-96">
 
-<p>
-  <strong>Stock:</strong>
-  <%= @sell_order.stock_id %>
-</p>
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+          <div>
+            <strong class="text-md text-tertiary">Stock name</strong><br>
+            <p class="truncate text-lg font-sans"><%= @sell_order.stock.name %></p>
+          </div>
+        </div>
+      </div>
 
-<p>
-  <strong>Seller:</strong>
-  <%= @sell_order.seller_id %>
-</p>
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+          <div>
+            <strong class="text-md text-tertiary">Quantity</strong><br>
+            <p class="truncate text-lg font-sans"><%= @sell_order.quantity %></p>
+          </div>
+        </div>
+      </div>
 
-<p>
-  <strong>Buyer:</strong>
-  <%= @sell_order.buyer_id %>
-</p>
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+          <div>
+            <strong class="text-md text-tertiary">Expiry Date</strong><br>
+            <p class="truncate text-lg font-sans"><%= @sell_order.expiry_date %></p>
+          </div>
+        </div>
+      </div>
 
-<% if @sell_order.report.attached? %>
-  <p>
-    <strong>Report:</strong>
-    <%= image_tag @sell_order.report %>
-  </p>
-<% end %>
+      <div class="flex flex-row">
+        <div class="p-2 w-80">
+          <div class="p-3 rounded-lg border bg-up shadow flex flex-row justify-center h-10">
+            <div>
+              <strong class="text-md text-white">Vote Bullish</strong><br>
+            </div>
+          </div>
+        </div>
 
-<%# Only shows when there is no Buyer %>
-<% if @sell_order.buyer_id == nil %>
-  <%# If a non-User is accessing the link %>
-  <% if !user_signed_in? %>
-    <%= button_to "Buy Now", new_user_session_path, method: :get %>
-  <%# If User is the owner of the seller order %>
-  <% elsif current_user.id && current_user.id == @sell_order.seller_id %>
-    <%= link_to 'Edit', edit_sell_order_path(@sell_order) %> |
-  <%# If User is not the owner of the order %>
-  <% else %>
-    <button data-stripe="payment">Buy Now!</button>
-  <% end %>
-<% end %>
+        <div class="p-2 w-80">
+          <div class="p-3 rounded-lg border bg-down shadow flex flex-row justify-center h-10">
+            <div>
+              <strong class="text-md text-white">Vote Bearish</strong><br>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<%= link_to 'Back', sell_orders_path %>
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-600 shadow flex flex-row justify-center">
+          <div>
+          <%# Only shows when there is no Buyer %>
+          <% if @sell_order.buyer_id == nil %>
+            <% if !user_signed_in? %>   <%# If a non-User is accessing the link %>
+              <p class="text-lg font-sans"><%= link_to "Buy Now", new_user_session_path, method: :get %></p>
+            <% elsif current_user.id && current_user.id == @sell_order.seller_id %> <%# If User is the owner of the seller order %>
+              <p class="text-lg font-sans"><%= link_to 'Edit', edit_sell_order_path(@sell_order) %></p>
+            <% else %>   <%# If User is not the owner of the order %>
+              <strong class="text-lg font-sans text-white" data-stripe="payment">Buy Now!</strong>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-secondary shadow flex flex-row justify-center">
+          <div class="truncate text-lg font-sans">
+            <%= link_to 'Back', sell_orders_path %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>
