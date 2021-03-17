@@ -1,5 +1,6 @@
 class SellOrdersController < ApplicationController
-  before_action :set_sell_order, only: %i[ show edit update destroy ]
+  before_action :set_sell_order, only: %i[ show edit update destroy authorise_user]
+  before_action :authorise_user, only: %i[ edit destroy ]
 
   # GET /sell_orders or /sell_orders.json
   def index
@@ -108,5 +109,14 @@ class SellOrdersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def sell_order_params
       params.require(:sell_order).permit(:quantity, :price, :expiry_date, :stock_id, :seller_id, :buyer_id)
+    end
+
+    # 
+    def authorise_user
+      respond_to do |format|
+        if current_user.id != @sell_order.seller_id
+          format.html { redirect_to root_path, alert: "You are not authorised to perform this action" }
+        end
+      end
     end
 end
