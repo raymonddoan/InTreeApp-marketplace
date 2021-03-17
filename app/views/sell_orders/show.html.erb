@@ -24,6 +24,15 @@
       <div class="p-2">
         <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
           <div>
+            <strong class="text-md text-tertiary">Price</strong><br>
+            <p class="truncate text-lg font-sans"><%= @sell_order.price %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-gray-400 shadow flex flex-row justify-between">
+          <div>
             <strong class="text-md text-tertiary">Quantity</strong><br>
             <p class="truncate text-lg font-sans"><%= @sell_order.quantity %></p>
           </div>
@@ -40,7 +49,7 @@
       </div>
 
       <div class="flex flex-row">
-        <div class="p-2 w-80">
+        <div class="p-2 w-1/2">
           <div class="p-3 rounded-lg border bg-up shadow flex flex-row justify-center h-10">
             <div>
               <strong class="text-md text-white">Vote Bullish</strong><br>
@@ -48,7 +57,7 @@
           </div>
         </div>
 
-        <div class="p-2 w-80">
+        <div class="p-2 w-1/2">
           <div class="p-3 rounded-lg border bg-down shadow flex flex-row justify-center h-10">
             <div>
               <strong class="text-md text-white">Vote Bearish</strong><br>
