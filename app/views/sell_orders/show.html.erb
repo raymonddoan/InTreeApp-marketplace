@@ -68,13 +68,14 @@
 
       <div class="p-2">
         <div class="p-3 rounded-lg border bg-gray-600 shadow flex flex-row justify-center">
-          <div>
+          <div class="flex flex-col justify-center text-center">
           <%# Only shows when there is no Buyer %>
           <% if @sell_order.buyer_id == nil %>
             <% if !user_signed_in? %>   <%# If a non-User is accessing the link %>
               <p class="text-lg font-sans"><%= link_to "Buy Now", new_user_session_path, method: :get %></p>
             <% elsif current_user.id && current_user.id == @sell_order.seller_id %> <%# If User is the owner of the seller order %>
               <p class="text-lg font-sans"><%= link_to 'Edit', edit_sell_order_path(@sell_order) %></p>
+              <p class="text-lg font-sans"><%= link_to 'Delete', @sell_order, method: :delete, data: { confirm: 'Are you sure?' } %></p>
             <% else %>   <%# If User is not the owner of the order %>
               <strong class="text-lg font-sans text-white" data-stripe="payment">Buy Now!</strong>
             <% end %>
@@ -86,7 +87,7 @@
       </div>
 
       <div class="p-2">
-        <div class="p-3 rounded-lg border bg-secondary shadow flex flex-row justify-center">
+        <div class="p-3 rounded-lg border bg-tertiary shadow flex flex-row justify-center">
           <div class="truncate text-lg font-sans">
             <%= link_to 'Back', sell_orders_path %>
           </div>
