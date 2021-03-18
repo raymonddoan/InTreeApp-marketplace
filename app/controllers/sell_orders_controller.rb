@@ -75,13 +75,16 @@ class SellOrdersController < ApplicationController
   # PATCH/PUT /sell_orders/1 or /sell_orders/1.json
   def update
     @sell_order.seller_id = current_user.id
-    @sell_order.report.attach(params[:sell_order][:report])
+    if params[:sell_order][:report]
+      @sell_order.report.attach(params[:sell_order][:report])
+    end
+    
     if @sell_order.buyer_id != nil
       @sell_order.filled = true
     end
     
     respond_to do |format|
-      if @sell_order.update(sell_order_params)
+      if @sell_order.update(sell_order_params)  
         format.html { redirect_to @sell_order, notice: "Sell order was successfully updated." }
         format.json { render :show, status: :ok, location: @sell_order }
       else
@@ -108,14 +111,16 @@ class SellOrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sell_order_params
-      params.require(:sell_order).permit(:quantity, :price, :expiry_date, :stock_id, :seller_id, :buyer_id)
+      params.require(:sell_order).permit(:quantity, :price, :expiry_date, :stock_id, :seller_id, :buyer_id, :report)
     end
 
-    # 
+    # Allows authorised 
     def authorise_user
       respond_to do |format|
         if current_user.id != @sell_order.seller_id
           format.html { redirect_to root_path, alert: "You are not authorised to perform this action" }
+        else
+          break
         end
       end
     end
