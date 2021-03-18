@@ -108,7 +108,7 @@ class SellOrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sell_order_params
-      params.require(:sell_order).permit(:quantity, :price, :expiry_date, :stock_id, :seller_id, :buyer_id)
+      params.require(:sell_order).permit(:quantity, :price, :expiry_date, :stock_id, :seller_id, :buyer_id, :report)
     end
 
     # 
@@ -116,6 +116,8 @@ class SellOrdersController < ApplicationController
       respond_to do |format|
         if current_user.id != @sell_order.seller_id
           format.html { redirect_to root_path, alert: "You are not authorised to perform this action" }
+        else
+          break
         end
       end
     end
