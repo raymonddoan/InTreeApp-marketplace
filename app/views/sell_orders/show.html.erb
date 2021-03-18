@@ -5,7 +5,7 @@
 
   <div class="flex justify-center">
     <% if @sell_order.report.attached? %>
-      <p class="bg-opacity-20"><%= image_tag(@sell_order.report, width: "300px") %></p>
+      <p class="bg-opacity-20 w-96 md:w-1/2 flex justify-center"><%= image_tag(@sell_order.report) %></p>
     <% end %>
   </div>
 
