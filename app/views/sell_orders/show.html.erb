@@ -87,6 +87,19 @@
 
       <div class="p-2">
         <div class="p-3 rounded-lg border bg-secondary shadow flex flex-row justify-center">
+          <% if @sell_order.buyer_id == nil %>
+            <% if !user_signed_in? || current_user.id && current_user.id == @sell_order.seller_id%>   <%# If a non-User is accessing the link %>
+              <div class="truncate text-lg font-sans">
+                <%= link_to 'Delete', @sell_order, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            <% end %>
+          <% else %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="p-3 rounded-lg border bg-tertiary shadow flex flex-row justify-center">
           <div class="truncate text-lg font-sans">
             <%= link_to 'Back', sell_orders_path %>
           </div>
