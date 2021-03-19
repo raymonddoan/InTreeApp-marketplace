@@ -46,18 +46,18 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Add devise gem for authentication
-gem 'devise', '~> 4.7.3'
+gem 'devise'
 
 # Add httparty gem for APIs
-gem 'httparty', '~> 0.18.1'
+gem 'httparty'
 
 # Add cloudinary and active-storage gems for uploading capacity
-gem 'carrierwave', '~> 2.2' # Adding this gem to modify Cloudinary images, but currently having issues
-gem 'cloudinary', '>= 1.18.1'
-gem 'activestorage-cloudinary-service', '~> 0.2.3'
+gem 'carrierwave' # Adding this gem to modify Cloudinary images, but currently having issues
+gem 'cloudinary'
+gem 'activestorage-cloudinary-service'
 
 # Add validator to make sure the uploaded documents are valid
-gem 'active_storage_validations', '~> 0.9.2'
+gem 'active_storage_validations'
 
 # Add stripe for payment capabilities
-gem 'stripe', '>= 5.0'
+gem 'stripe'
