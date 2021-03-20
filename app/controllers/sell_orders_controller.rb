@@ -38,13 +38,10 @@ class SellOrdersController < ApplicationController
     
       @session_id = session.id
     end
-
-    pp @sell_order.report
   end
 
   # GET /sell_orders/new
   def new
-    # @uid = current_user.id
     @sell_order = SellOrder.new
   end
 
@@ -111,7 +108,7 @@ class SellOrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sell_order_params
-      params.require(:sell_order).permit(:quantity, :price, :expiry_date, :stock_id, :seller_id, :buyer_id, :report)
+      params.require(:sell_order).permit(:quantity, :price, :expiry_date, :stock_id, :seller_id, :buyer_id)
     end
 
     # Allows authorised 
