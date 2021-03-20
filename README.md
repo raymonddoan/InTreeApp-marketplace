@@ -104,9 +104,9 @@ Once completed, you will be able to start the server:
 rails s
 ```
 
-From here, log into Ultrahook (`https://www.ultrahook.com/`) to receive webhooks on your local machine. Follow steps provided in the email set upon signup.
+**IMPORTANT:** Now, log into Ultrahook (`https://www.ultrahook.com/`) to receive webhooks on your local machine. Follow steps provided in the email set once signed up.
 
-Once setup, go to `localhost:3000` and you will be able to use the application.
+Once Ultrahook is setup, go to `localhost:3000` and you will be able to use the application.
 
 You can create your own log in details or use one of the following test accounts:
 
